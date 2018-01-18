@@ -10,7 +10,7 @@
 				[932, 176],
 				[932, 7],
 			],
-			position: [868, 50],
+			position: [875, 154],
 			title: 'Помещение',
 			description: 'Неопознанное помещение используется для хранения непонятных вещей и постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание направлений прогрессивного развития',
 		},
@@ -21,7 +21,7 @@
 				[64, 586],
 				[64, 64],
 			],
-			position: [32, 100],
+			position: [32, 202],
 			title: 'Железная дорога',
 			description: 'Служит для приема и отправки грузов поездом',
 		},
@@ -32,7 +32,7 @@
 				[425, 390],
 				[425, 236],
 			],
-			position: [165, 250],
+			position: [370, 276],
 			title: 'Зона 1',
 			description: 'Зона 1 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
@@ -45,7 +45,7 @@
 				[797, 337],
 				[797, 236],
 			],
-			position: [0, 250],
+			position: [630, 364],
 			title: 'Зона 2',
 			description: 'Зона 2 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
@@ -58,7 +58,7 @@
 				[405, 504],
 				[405, 447],
 			],
-			position: [0, 450],
+			position: [350, 480],
 			title: 'Зона 3',
 			description: 'Зона 3 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
@@ -69,7 +69,7 @@
 				[716, 579],
 				[716, 460],
 			],
-			position: [0, 450],
+			position: [670, 556],
 			title: 'Склад',
 			description: 'Склад используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
@@ -147,6 +147,7 @@
 	$(document).on('mousemove', (event) => {
 		const cursor = getCursorInMap([event.clientX, event.clientY]);
 
+		const $iMapBg = $iMap.find('.imap-bg');
 		const $iMapSb = $iMap.find('.imap-sb');
 
 		// todo: не удалять все описания для корректной работы анимаций
@@ -155,14 +156,19 @@
 			regions.forEach(region => {
 				if (! cursorInRegion(cursor, region.points)) return;
 
-				const $item = $(`
-					<div class="imap-sb-item">
-						<div class="imap-sb-item-title">${region.title}</div>
-						<div class="imap-sb-item-description">${region.description}</div>
-					</div>
-				`);
-				$item.css('top', region.position[1] - 30);
+				const $item = $(`<div class="imap-sb-item"></div>`);
+				$item.css('top', region.position[1]);
 				$item.appendTo($iMapSb);
+
+				const $itemTitle = $(`<div class="imap-sb-item-title">${region.title}</div>`);
+				$itemTitle.appendTo($item);
+
+				const $itemDescription = $(`<div class="imap-sb-item-description">${region.description}</div>`);
+				$itemDescription.appendTo($item);
+
+				const $itemPointer = $(`<div class="imap-sb-item-pointer"></div>`);
+				$itemPointer.css('left', region.position[0] - $iMapBg.innerWidth());
+				$itemPointer.appendTo($item);
 			});
 		}
 	});
