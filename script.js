@@ -147,15 +147,22 @@
 	$(document).on('mousemove click', (event) => {
 		const cursor = getCursorInMap([event.clientX, event.clientY]);
 
+		const oldShown = regions.filter(region => region.isShown);
+
+		regions.forEach(region => {
+			region.isShown = cursor && cursorInRegion(cursor, region.points);
+		});
+
+		const newShown = regions.filter(region => region.isShown);
+
 		const $iMapSb = $iMap.find('.imap-sb');
+		regions.forEach((region, index) => {
+			if (oldShown.includes(region) && ! newShown.includes(region)) {
+				$iMapSb.find(`#item-${index}`).remove();
+			}
 
-		// todo: не удалять все описания для корректной работы анимаций
-		$iMapSb.html('');
-		if (cursor) {
-			regions.forEach(region => {
-				if (! cursorInRegion(cursor, region.points)) return;
-
-				const $item = $(`<div class="imap-sb-item"></div>`);
+			if (! oldShown.includes(region) && newShown.includes(region)) {
+				const $item = $(`<div id="item-${index}" class="imap-sb-item"></div>`);
 				$item.css('left', region.position[0]);
 				$item.css('top', region.position[1]);
 				$item.appendTo($iMapSb);
@@ -170,7 +177,11 @@
 				$itemPointer.css('left', region.position[0]);
 				$itemPointer.css('top', region.position[1]);
 				$itemPointer.appendTo($item);
-			});
-		}
+			}
+
+			if (newShown.includes(region) && event.type === 'click') {
+				$iMapSb.find(`#item-${index}`).addClass('imap-sb-item_click');
+			}
+		});
 	});
 })($('.imap'));
