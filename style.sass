@@ -51,9 +51,9 @@ $sbHeight: 200px
 				color: #f7f3f2
 
 			&-description
+				display: none
 				margin-top: 32px
 				margin-left: 25px
-				opacity: 0
 
 				font-family: Roboto, Arial, sans-serif
 				font-size: 20px
@@ -61,8 +61,6 @@ $sbHeight: 200px
 				font-weight: 300
 
 				color: #f7f3f2
-
-				transition: opacity .3s
 
 			&-pointer
 				position: absolute
@@ -88,7 +86,7 @@ $sbHeight: 200px
 
 			&_click
 				.imap-sb-item-description
-					opacity: 1
+					display: block
 
 
 @media screen and (max-width: 900px)
@@ -108,4 +106,3 @@ $sbHeight: 200px
 
 				&-pointer
 					display: none
-
