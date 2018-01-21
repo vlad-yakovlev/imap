@@ -144,10 +144,9 @@
 	updateScale();
 
 
-	$(document).on('mousemove', (event) => {
+	$(document).on('mousemove click', (event) => {
 		const cursor = getCursorInMap([event.clientX, event.clientY]);
 
-		const $iMapBg = $iMap.find('.imap-bg');
 		const $iMapSb = $iMap.find('.imap-sb');
 
 		// todo: не удалять все описания для корректной работы анимаций
@@ -157,6 +156,7 @@
 				if (! cursorInRegion(cursor, region.points)) return;
 
 				const $item = $(`<div class="imap-sb-item"></div>`);
+				$item.css('left', region.position[0]);
 				$item.css('top', region.position[1]);
 				$item.appendTo($iMapSb);
 
@@ -167,7 +167,8 @@
 				$itemDescription.appendTo($item);
 
 				const $itemPointer = $(`<div class="imap-sb-item-pointer"></div>`);
-				$itemPointer.css('left', region.position[0] - $iMapBg.innerWidth());
+				$itemPointer.css('left', region.position[0]);
+				$itemPointer.css('top', region.position[1]);
 				$itemPointer.appendTo($item);
 			});
 		}

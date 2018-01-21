@@ -2,6 +2,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400&subset=cyrillic)
 
 
+$bgWidth: 980px
+$bgHeight: 690px
+$sbWidth: 500px
+$sbHeight: 200px
+
+
 .imap-wrap
 	position: absolute
 	top: 0
@@ -14,27 +20,27 @@
 .imap
 	position: relative
 	display: flex
-	box-sizing: border-box
-	width: 1580px
-	height: 790px
+	box-sizing: content-box
+	width: $bgWidth + $sbWidth
+	height: $bgHeight
 	padding: 50px
 	transform-origin: top left
 
 	&-bg
-		height: 100%
+		flex: 0 0 $bgWidth
 		pointer-events: none
 
 	&-sb
 		position: relative
-		flex: 1 1
+		flex: 0 0 $sbWidth
 
 		&-item
 			position: absolute
-			left: 25px
+			left: 0 !important
 			margin-top: -30px
 
 			&-title
-				margin-left: 58px
+				margin-left: 83px
 
 				font-family: Comfortaa, cursive
 				font-size: 24px
@@ -46,6 +52,7 @@
 
 			&-description
 				margin-top: 32px
+				margin-left: 25px
 
 				font-family: Roboto, Arial, sans-serif
 				font-size: 20px
@@ -56,10 +63,10 @@
 
 			&-pointer
 				position: absolute
-				top: 24px
+				top: 24px !important
 				right: 100%
-				margin-left: -25px
-				margin-right: -40px
+				margin-left: -$bgWidth
+				margin-right: -65px
 				height: 1px
 
 				background-color: #fff
@@ -75,3 +82,23 @@
 
 					background-color: #fff
 					border-radius: 50%
+
+
+@media screen and (max-width: 900px)
+	.imap
+		flex-direction: column
+		width: $bgWidth
+		height: $bgHeight + $sbHeight
+
+		&-bg
+			flex: 0 0 $bgHeight
+
+		&-sb
+			flex: 0 0 $sbHeight
+
+			&-item
+				top: 55px !important
+
+				&-pointer
+					display: none
+
