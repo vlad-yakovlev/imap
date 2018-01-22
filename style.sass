@@ -26,6 +26,8 @@ $sbHeight: 200px
 	padding: 50px
 	transform-origin: top left
 
+	color: #f7f3f2
+
 	&-bg
 		flex: 0 0 $bgWidth
 		pointer-events: none
@@ -48,8 +50,6 @@ $sbHeight: 200px
 				font-weight: 700
 				text-transform: uppercase
 
-				color: #f7f3f2
-
 			&-description
 				display: none
 				margin-top: 32px
@@ -59,8 +59,6 @@ $sbHeight: 200px
 				font-size: 20px
 				line-height: 1.25
 				font-weight: 300
-
-				color: #f7f3f2
 
 			&-pointer
 				position: absolute
@@ -95,6 +93,8 @@ $sbHeight: 200px
 		width: $bgWidth
 		height: $bgHeight + $sbHeight
 
+		color: #032d4e
+
 		&-bg
 			flex: 0 0 $bgHeight
 
@@ -102,7 +102,26 @@ $sbHeight: 200px
 			flex: 0 0 $sbHeight
 
 			&-item
+				display: none
+
 				top: 55px !important
+
+				width: 100%
+				padding: 20px 0
+				margin: -20px 0
+
+				background-color: #fff
+
+				&-title
+					margin-right: 25px
+
+				&-description
+					display: block
+
+					margin-right: 25px
 
 				&-pointer
 					display: none
+
+				&_click
+					display: block
