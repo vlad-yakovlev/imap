@@ -40,6 +40,9 @@ $sbHeight: 200px
 			position: absolute
 			left: 0 !important
 			margin-top: -30px
+			opacity: 0
+
+			transition: opacity .3s
 
 			&-title
 				margin-left: 83px
@@ -51,14 +54,16 @@ $sbHeight: 200px
 				text-transform: uppercase
 
 			&-description
-				display: none
 				margin-top: 32px
 				margin-left: 25px
+				opacity: 0
 
 				font-family: Roboto, Arial, sans-serif
 				font-size: 20px
 				line-height: 1.25
 				font-weight: 300
+
+				transition: opacity .3s
 
 			&-pointer
 				position: absolute
@@ -82,9 +87,12 @@ $sbHeight: 200px
 					background-color: #fff
 					border-radius: 50%
 
+			&_active
+				opacity: 1
+
 			&_click
 				.imap-sb-item-description
-					display: block
+					opacity: 1
 
 
 @media screen and (max-width: 900px)
@@ -102,8 +110,6 @@ $sbHeight: 200px
 			flex: 0 0 $sbHeight
 
 			&-item
-				display: none
-
 				top: 55px !important
 
 				width: 100%
@@ -116,12 +122,13 @@ $sbHeight: 200px
 					margin-right: 25px
 
 				&-description
-					display: block
-
 					margin-right: 25px
 
 				&-pointer
 					display: none
 
+				&_active
+					opacity: 0
+
 				&_click
-					display: block
+					opacity: 1

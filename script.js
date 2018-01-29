@@ -4,6 +4,7 @@
 
 	const regions = [
 		{
+			id: 'room',
 			points: [
 				[858, 7],
 				[803, 176],
@@ -11,10 +12,9 @@
 				[932, 7],
 			],
 			position: [875, 154],
-			title: 'Помещение',
-			description: 'Неопознанное помещение используется для хранения непонятных вещей и постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание направлений прогрессивного развития',
 		},
 		{
+			id: 'rails',
 			points: [
 				[0, 64],
 				[0, 586],
@@ -22,10 +22,9 @@
 				[64, 64],
 			],
 			position: [32, 202],
-			title: 'Железная дорога',
-			description: 'Служит для приема и отправки грузов поездом',
 		},
 		{
+			id: 'zone1',
 			points: [
 				[96, 236],
 				[96, 390],
@@ -33,10 +32,9 @@
 				[425, 236],
 			],
 			position: [370, 276],
-			title: 'Зона 1',
-			description: 'Зона 1 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
 		{
+			id: 'zone2',
 			points: [
 				[468, 236],
 				[468, 390],
@@ -46,10 +44,9 @@
 				[797, 236],
 			],
 			position: [630, 364],
-			title: 'Зона 2',
-			description: 'Зона 2 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
 		{
+			id: 'zone3',
 			points: [
 				[96, 447],
 				[96, 523],
@@ -59,10 +56,9 @@
 				[405, 447],
 			],
 			position: [350, 480],
-			title: 'Зона 3',
-			description: 'Зона 3 используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
 		{
+			id: 'stock',
 			points: [
 				[498, 460],
 				[498, 579],
@@ -70,10 +66,21 @@
 				[716, 460],
 			],
 			position: [670, 556],
-			title: 'Склад',
-			description: 'Склад используется для хранения различной атрибутики необходимой в повседневной деятельности',
 		},
 	];
+
+
+	regions.forEach((region) => {
+		const $item = $iMap.find(`#sb-${region.id}`);
+		$item.css('left', region.position[0]);
+		$item.css('top', region.position[1]);
+
+		const $itemPointer = $('<div class="imap-sb-item-pointer"></div>');
+		$itemPointer.css('left', region.position[0]);
+		$itemPointer.css('top', region.position[1]);
+		$itemPointer.appendTo($item);
+	});
+
 
 	let scale = 1;
 
@@ -90,7 +97,7 @@
 
 	function getCursorInMap(cursor) {
 		// Может перестать корректно работать при наличии прокрутки
-		const { left, top, right, bottom, width, height } = $('.imap-bg')[0].getBoundingClientRect();
+		const { left, top, right, bottom } = $('.imap-bg')[0].getBoundingClientRect();
 
 
 		// Проверяем, что мы находимся в пределах карты
@@ -149,38 +156,24 @@
 
 		const oldShown = regions.filter(region => region.isShown);
 
-		regions.forEach(region => {
+		regions.forEach((region) => {
 			region.isShown = cursor && cursorInRegion(cursor, region.points);
 		});
 
 		const newShown = regions.filter(region => region.isShown);
 
-		const $iMapSb = $iMap.find('.imap-sb');
-		regions.forEach((region, index) => {
+		regions.forEach((region) => {
 			if (oldShown.includes(region) && ! newShown.includes(region)) {
-				$iMapSb.find(`#item-${index}`).remove();
+				$iMap.find(`#sb-${region.id}`).removeClass('imap-sb-item_active');
+				$iMap.find(`#sb-${region.id}`).removeClass('imap-sb-item_click');
 			}
 
 			if (! oldShown.includes(region) && newShown.includes(region)) {
-				const $item = $(`<div id="item-${index}" class="imap-sb-item"></div>`);
-				$item.css('left', region.position[0]);
-				$item.css('top', region.position[1]);
-				$item.appendTo($iMapSb);
-
-				const $itemTitle = $(`<div class="imap-sb-item-title">${region.title}</div>`);
-				$itemTitle.appendTo($item);
-
-				const $itemDescription = $(`<div class="imap-sb-item-description">${region.description}</div>`);
-				$itemDescription.appendTo($item);
-
-				const $itemPointer = $(`<div class="imap-sb-item-pointer"></div>`);
-				$itemPointer.css('left', region.position[0]);
-				$itemPointer.css('top', region.position[1]);
-				$itemPointer.appendTo($item);
+				$iMap.find(`#sb-${region.id}`).addClass('imap-sb-item_active');
 			}
 
 			if (newShown.includes(region) && event.type === 'click') {
-				$iMapSb.find(`#item-${index}`).addClass('imap-sb-item_click');
+				$iMap.find(`#sb-${region.id}`).addClass('imap-sb-item_click');
 			}
 		});
 	});
