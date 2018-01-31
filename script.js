@@ -164,6 +164,7 @@
 
 		regions.forEach((region) => {
 			if (oldShown.includes(region) && ! newShown.includes(region)) {
+				$iMap.find(`#fl-${region.id}`).removeClass('imap-fl-item_active');
 				$iMap.find(`#sb-${region.id}`).removeClass('imap-sb-item_active');
 				$iMap.find(`#sb-${region.id}`).removeClass('imap-sb-item_click');
 			}
@@ -173,6 +174,7 @@
 			}
 
 			if (newShown.includes(region) && event.type === 'click') {
+				$iMap.find(`#fl-${region.id}`).addClass('imap-fl-item_active');
 				$iMap.find(`#sb-${region.id}`).addClass('imap-sb-item_click');
 			}
 		});
