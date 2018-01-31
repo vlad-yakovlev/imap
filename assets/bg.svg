@@ -165,16 +165,16 @@
 			<path d="M1013,786 L961.5,742.5" id="Line-5" stroke="#FF0000" stroke-width="4" stroke-linecap="square"></path>
 			<path id="Line-5-decoration-1" d="M971.686477,747.177146 L961.5,742.5 L967.814814,751.760838" stroke="#FF0000" stroke-width="4" stroke-linecap="square"></path>
 			<g id="Group-4" transform="translate(207.000000, 172.000000)">
-				<text id="въезд" font-family="Comfortaa-Regular, Comfortaa" font-size="20" font-weight="normal" fill="#FFFFFF">
+				<text id="въезд" font-family="Comfortaa" font-size="20" font-weight="400" fill="#FFFFFF">
 					<tspan x="781" y="646">въезд</tspan>
 				</text>
-				<text id="Дон" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#F7F3F2">
+				<text id="Дон" font-family="Comfortaa" font-size="24" font-weight="700" fill="#F7F3F2">
 					<tspan x="280" y="26">Дон</tspan>
 				</text>
-				<text id="Склад" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#F7F3F2">
+				<text id="Склад" font-family="Comfortaa" font-size="24" font-weight="700" fill="#F7F3F2">
 					<tspan x="440" y="524">Склад</tspan>
 				</text>
-				<text id="Планируемый-выезд" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#F7F3F2">
+				<text id="Планируемый-выезд" font-family="Comfortaa" font-size="24" font-weight="700" fill="#F7F3F2">
 					<tspan x="0" y="653">Планируемый выезд</tspan>
 				</text>
 			</g>

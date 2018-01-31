@@ -28,10 +28,6 @@ $sbHeight: 200px
 
 	color: #f7f3f2
 
-	&-bg
-		flex: 0 0 $bgWidth
-		pointer-events: none
-
 	&-fl
 		pointer-events: none
 
@@ -44,7 +40,14 @@ $sbHeight: 200px
 			transition: opacity .3s
 
 			&_active
-				opacity: 1
+				opacity: .2
+
+	&-bg
+		position: relative
+		z-index: 1
+
+		flex: 0 0 $bgWidth
+		pointer-events: none
 
 	&-sb
 		position: relative
