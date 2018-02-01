@@ -1,84 +1,35 @@
-(($iMap) => {
+(($iMap, regions) => {
 	'use strict';
 
 
-	const regions = [
-		{
-			id: 'room',
-			points: [
-				[860, 7],
-				[805, 174],
-				[932, 174],
-				[932, 7],
-			],
-			position: [875, 154],
-		},
-		{
-			id: 'rails',
-			points: [
-				[2, 66],
-				[2, 582],
-				[66, 582],
-				[66, 66],
-			],
-			position: [32, 202],
-		},
-		{
-			id: 'zone1',
-			points: [
-				[98, 237],
-				[98, 387],
-				[423, 387],
-				[423, 237],
-			],
-			position: [370, 276],
-		},
-		{
-			id: 'zone2',
-			points: [
-				[470, 237],
-				[470, 387],
-				[691, 387],
-				[691, 334],
-				[795, 334],
-				[795, 237],
-			],
-			position: [630, 364],
-		},
-		{
-			id: 'zone3',
-			points: [
-				[98, 448],
-				[98, 521],
-				[194, 562],
-				[373, 563],
-				[403, 504],
-				[403, 448],
-			],
-			position: [350, 480],
-		},
-		{
-			id: 'stock',
-			points: [
-				[500, 462],
-				[500, 577],
-				[714, 577],
-				[714, 462],
-			],
-			position: [670, 556],
-		},
-	];
-
-
 	regions.forEach((region) => {
-		const $item = $iMap.find(`#sb-${region.id}`);
-		$item.css('left', region.position[0]);
-		$item.css('top', region.position[1]);
+		const $fl = $iMap.find('#fl');
 
-		const $itemPointer = $('<div class="imap-sb-item-pointer"></div>');
-		$itemPointer.css('left', region.position[0]);
-		$itemPointer.css('top', region.position[1]);
-		$itemPointer.appendTo($item);
+		const $flItem = $(`
+			<svg id="fl-${region.id}" class="imap-fl-item" xmlns="http://www.w3.org/2000/svg">
+				<polygon fill="${region.color}" points="${region.points.map(point => point.join(',')).join(' ')}"/>
+			</svg>
+		`);
+		$flItem.appendTo($fl);
+
+
+		const $sb = $iMap.find('#sb');
+
+		const $sbItem = $(`<div id="sb-${region.id}" class="imap-sb-item"></div>`);
+		$sbItem.css('left', region.position[0]);
+		$sbItem.css('top', region.position[1]);
+		$sbItem.appendTo($sb);
+
+		const $sbItemTitle = $(`<div class="imap-sb-item-title">${region.title}</div>`);
+		$sbItemTitle.appendTo($sbItem);
+
+		const $sbItemDescription = $(`<div class="imap-sb-item-description">${region.description}</div>`);
+		$sbItemDescription.appendTo($sbItem);
+
+		const $sbItemPointer = $('<div class="imap-sb-item-pointer"></div>');
+		$sbItemPointer.css('left', region.position[0]);
+		$sbItemPointer.css('top', region.position[1]);
+		$sbItemPointer.appendTo($sbItem);
 	});
 
 
@@ -179,4 +130,87 @@
 			}
 		});
 	});
-})($('.imap'));
+})($('.imap'), [
+	{
+		id: 'room',
+		points: [
+			[860, 7],
+			[805, 174],
+			[932, 174],
+			[932, 7],
+		],
+		position: [875, 154],
+		title: 'Помещение',
+		description: 'Неопознанное помещение используется для хранения непонятных вещей и постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание направлений прогрессивного развития',
+		color: '#08FF64',
+	},
+	{
+		id: 'rails',
+		points: [
+			[2, 66],
+			[2, 582],
+			[66, 582],
+			[66, 66],
+		],
+		position: [32, 202],
+		title: 'Железная дорога',
+		description: 'Служит для приема и отправки грузов поездом',
+		color: '#FFFFFF',
+	},
+	{
+		id: 'zone1',
+		points: [
+			[98, 237],
+			[98, 387],
+			[423, 387],
+			[423, 237],
+		],
+		position: [370, 276],
+		title: 'Зона 1',
+		description: 'Зона 1 используется для хранения различной атрибутики необходимой в повседневной деятельности',
+		color: '#FF0000',
+	},
+	{
+		id: 'zone2',
+		points: [
+			[470, 237],
+			[470, 387],
+			[691, 387],
+			[691, 334],
+			[795, 334],
+			[795, 237],
+		],
+		position: [630, 364],
+		title: 'Зона 2',
+		description: 'Зона 2 используется для хранения различной атрибутики необходимой в повседневной деятельности',
+		color: '#FF0000',
+	},
+	{
+		id: 'zone3',
+		points: [
+			[98, 448],
+			[98, 521],
+			[194, 562],
+			[373, 563],
+			[403, 504],
+			[403, 448],
+		],
+		position: [350, 480],
+		title: 'Зона 3',
+		description: 'Зона 3 используется для хранения различной атрибутики необходимой в повседневной деятельности',
+		color: '#FF0000',
+	},
+	{
+		id: 'stock',
+		points: [
+			[500, 462],
+			[500, 577],
+			[714, 577],
+			[714, 462],
+		],
+		position: [670, 556],
+		title: 'Склад',
+		description: 'Склад используется для хранения различной атрибутики необходимой в повседневной деятельности',
+		color: '#FF0000',
+	},
+]);
